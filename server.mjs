@@ -1,6 +1,7 @@
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
-import { buildTrackedUrl, cookieDomainIndex, fbcCookie, readCookie } from './dist/tracking.js';
+import { trackDestination, cookieDomainIndex, fbcCookie, readCookie } from './dist/tracking.js';
+import { ATTRIBUTION_COOKIE, attributionCookie, hasAttribution } from './dist/attribution.js';
 
 const port = Number(process.env.PORT || 5173);
 const host = process.env.HOST || '0.0.0.0';
@@ -10,6 +11,7 @@ const files = new Map([
   ['/styles.css', ['styles.css', 'text/css; charset=utf-8']],
   ['/favicon.svg', ['favicon.svg', 'image/svg+xml']],
   ['/tracking.js', ['tracking.js', 'text/javascript; charset=utf-8']],
+  ['/attribution.js', ['attribution.js', 'text/javascript; charset=utf-8']],
 ]);
 
 function escapeAttribute(value) {
@@ -46,15 +48,21 @@ createServer(async (request, response) => {
       contents = Buffer.from(contents.toString('utf8').replace(
         /(<a\b[^>]*\bdata-track-outbound\b[^>]*\bhref=")([^"]+)(")/,
         (_, prefix, destination, suffix) => {
-          const url = buildTrackedUrl(destination.replaceAll('&amp;', '&'), {
+          const { url, record } = trackDestination(destination.replaceAll('&amp;', '&'), {
             search: requestUrl.search,
             cookie,
+            stored: [readCookie(cookie, ATTRIBUTION_COOKIE)],
             subdomainIndex: cookieDomainIndex(requestUrl.hostname),
           });
+          const cookies = [];
           const fbc = url.searchParams.get('fbc');
           if (requestUrl.searchParams.get('fbclid') && fbc && readCookie(cookie, '_fbc') !== fbc) {
-            response.setHeader('Set-Cookie', fbcCookie(fbc, secure));
+            cookies.push(fbcCookie(fbc, secure));
           }
+          if (hasAttribution(record) && readCookie(cookie, ATTRIBUTION_COOKIE) !== JSON.stringify(record)) {
+            cookies.push(attributionCookie(record, secure));
+          }
+          if (cookies.length) response.setHeader('Set-Cookie', cookies);
           return `${prefix}${escapeAttribute(url.href)}${suffix} data-track-base="${escapeAttribute(destination.replaceAll('&amp;', '&'))}"`;
         },
       ));
