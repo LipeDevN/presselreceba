@@ -1,0 +1,170 @@
+:root {
+  --al-bg: oklch(13% 0.04 45);
+  --al-glow: oklch(32% 0.12 45);
+  --al-orange: oklch(72% 0.19 50);
+  --al-orange-light: oklch(82% 0.15 65);
+  --al-orange-deep: oklch(62% 0.22 35);
+  --al-ink: oklch(18% 0.05 40);
+  --al-white: oklch(99% 0 0);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0 solid;
+}
+
+html {
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: var(--al-bg);
+  color: oklch(12.9% 0.042 264.695);
+}
+
+svg {
+  display: block;
+  vertical-align: middle;
+}
+
+.al-body {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: radial-gradient(circle at 50% 35%, var(--al-glow), var(--al-bg) 65%);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.al-container {
+  display: flex;
+  width: 100%;
+  max-width: 380px;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+}
+
+.al-icon {
+  padding: 6px;
+  border-radius: 9999px;
+  box-shadow: 0 0 60px var(--al-orange);
+}
+
+.al-check {
+  display: grid;
+  width: 96px;
+  height: 96px;
+  place-items: center;
+  border: 3px solid var(--al-white);
+  border-radius: 9999px;
+  background: linear-gradient(135deg, var(--al-orange-light), var(--al-orange) 50%, var(--al-orange-deep));
+  animation: al-pulse 2s ease-in-out infinite;
+}
+
+.al-check svg {
+  width: 40px;
+  height: 40px;
+  fill: none;
+  stroke: var(--al-ink);
+  stroke-width: 4px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.al-title {
+  color: var(--al-white);
+  font-size: 2.6rem;
+  font-style: italic;
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  text-align: center;
+}
+
+.al-title span {
+  display: block;
+  color: var(--al-orange);
+}
+
+.al-cta {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 18px 24px;
+  border-radius: 14px;
+  background: linear-gradient(90deg, var(--al-orange-light), var(--al-orange) 55%, var(--al-orange-deep));
+  box-shadow: inset 0 2px 0 var(--al-white), inset 0 -4px 0 var(--al-ink), 0 12px 40px var(--al-orange);
+  color: var(--al-ink);
+  font-size: 1.3rem;
+  font-style: italic;
+  font-weight: 900;
+  text-decoration: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.15s;
+}
+
+.al-cta:active {
+  transform: scale(0.97);
+}
+
+.al-cta:focus-visible {
+  outline: 3px solid var(--al-white);
+  outline-offset: 6px;
+}
+
+.al-arrow {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border-radius: 9999px;
+  background: var(--al-ink);
+}
+
+.al-arrow svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: var(--al-orange);
+  stroke-width: 3px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@supports (color: color-mix(in oklab, red, red)) {
+  .al-icon {
+    box-shadow: 0 0 60px color-mix(in oklab, var(--al-orange) 50%, transparent);
+  }
+
+  .al-check {
+    border-color: color-mix(in oklab, var(--al-white) 35%, transparent);
+  }
+
+  .al-cta {
+    box-shadow:
+      inset 0 2px 0 color-mix(in oklab, var(--al-white) 45%, transparent),
+      inset 0 -4px 0 color-mix(in oklab, var(--al-ink) 30%, transparent),
+      0 12px 40px color-mix(in oklab, var(--al-orange) 55%, transparent);
+  }
+}
+
+@keyframes al-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .al-check { animation: none; }
+  .al-cta { transition: none; }
+}
