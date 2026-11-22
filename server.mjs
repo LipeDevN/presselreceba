@@ -2,6 +2,7 @@ import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 
 const port = Number(process.env.PORT || 5173);
+const host = process.env.HOST || '0.0.0.0';
 const files = new Map([
   ['/', ['index.html', 'text/html; charset=utf-8']],
   ['/index.html', ['index.html', 'text/html; charset=utf-8']],
@@ -35,6 +36,6 @@ createServer(async (request, response) => {
     response.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' });
     response.end('Não foi possível carregar a página.');
   }
-}).listen(port, '127.0.0.1', () => {
-  console.log(`Local: http://localhost:${port}`);
+}).listen(port, host, () => {
+  console.log(`Servidor disponível em http://${host}:${port}`);
 });
