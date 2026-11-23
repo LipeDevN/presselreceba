@@ -1,4 +1,4 @@
-# Acesso Liberado
+# presselreceba
 
 Cópia em HTML e CSS da página https://entre-agora-online-hub.lovable.app/.
 
@@ -16,7 +16,7 @@ Para testar o rastreamento, use o servidor local ou o endereço publicado; abrir
 ## Deploy no Railway
 
 1. No Railway, selecione **New Project → Deploy from GitHub repo**.
-2. Escolha **LipeDevN/pressel**, branch **main**.
+2. Escolha **LipeDevN/presselreceba**, branch **main**.
 3. Deixe **Root Directory** vazio (raiz do repositório). Não use `acesso-liberado` nem `dist`: os arquivos do projeto já estão na raiz do GitHub.
 4. Aguarde o deploy. O `railway.json` configura o Railpack, o comando `node server.mjs` e a verificação de saúde em `/`.
 5. No serviço, abra **Settings → Networking → Public Networking → Generate Domain** para obter o endereço público.
