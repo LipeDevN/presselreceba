@@ -35,13 +35,13 @@ Referências: [configuração por arquivo](https://docs.railway.com/config-as-co
 - `dist/tracking.js`: encaminhamento dos parâmetros do anúncio e identificadores Meta.
 - `dist/attribution.js`: armazenamento, recuperação e validade dos dados de campanha.
 
-O botão abre `https://7s3venbet.io/?r=8yzbyk`, conforme solicitado. O selo de edição e o rastreamento da plataforma Lovable não estão incluídos.
+O botão abre `https://recebaplx.bet/?r=54jwjv`, conforme solicitado. O selo de edição e o rastreamento da plataforma Lovable não estão incluídos.
 
 Para hospedar em um servidor estático, envie o conteúdo de `dist/`.
 
 ## Rastreamento dos anúncios
 
-O botão encaminha todos os parâmetros da URL de entrada: `utm_*`, `fbclid`, `gclid`, `gbraid`, `wbraid`, `ttclid`, `msclkid`, IDs de campanha/conjunto/anúncio e parâmetros personalizados. Valores repetidos, vazios e caracteres especiais são preservados. Os parâmetros fixos do destino têm prioridade: o código de afiliado continua sendo `r=8yzbyk`.
+O botão encaminha todos os parâmetros da URL de entrada: `utm_*`, `fbclid`, `gclid`, `gbraid`, `wbraid`, `ttclid`, `msclkid`, IDs de campanha/conjunto/anúncio e parâmetros personalizados. Valores repetidos, vazios e caracteres especiais são preservados. Os parâmetros fixos do destino têm prioridade: o código de afiliado continua sendo `r=54jwjv`.
 
 Exemplo de entrada:
 
@@ -49,7 +49,7 @@ Exemplo de entrada:
 https://sua-pressel.com/?utm_source=facebook&utm_campaign=campanha1&ad_id=123&fbclid=ABC123
 ```
 
-O botão mantém o domínio `7s3venbet.io` e acrescenta esses parâmetros à URL de destino.
+O botão mantém o domínio `recebaplx.bet` e acrescenta esses parâmetros à URL de destino.
 
 A atribuição recebida fica guardada por até 90 dias em `sessionStorage` (por aba) e `localStorage` (para retornos ao site). O cookie próprio `_pressel_attribution` permite ao servidor recuperar esses dados mesmo sem JavaScript. Assim, recarregar ou retornar à pressel com uma URL sem parâmetros mantém a atribuição no botão.
 

@@ -4,7 +4,7 @@ import { ATTRIBUTION_TTL, attributionCookie, parseAttribution, resolveAttributio
 import { trackDestination, readCookie } from '../dist/tracking.js';
 
 const now = 1795370000000;
-const destination = 'https://7s3venbet.io/?r=8yzbyk';
+const destination = 'https://recebaplx.bet/?r=54jwjv';
 const search = '?utm_source=facebook&utm_campaign=campanha1&fbclid=ClickA&ad_id=123&extra=one&extra=two';
 const initial = () => trackDestination(destination, { search, now }).record;
 
@@ -16,7 +16,7 @@ test('restores the complete campaign after reloading a clean URL', () => {
   }
   assert.equal(restored.url.searchParams.get('fbc'), first.fbc);
   assert.equal(restored.record.capturedAt, first.capturedAt);
-  assert.equal(restored.url.searchParams.get('r'), '8yzbyk');
+  assert.equal(restored.url.searchParams.get('r'), '54jwjv');
 });
 
 test('a second campaign replaces the first without importing its ad IDs or UTMs', () => {

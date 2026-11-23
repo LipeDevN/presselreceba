@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { buildTrackedUrl, cookieDomainIndex, fbcCookie, readCookie } from '../dist/tracking.js';
 
-const destination = 'https://7s3venbet.io/?r=8yzbyk';
+const destination = 'https://recebaplx.bet/?r=54jwjv';
 const now = 1795320000000;
 
 test('forwards all incoming parameters, repeated values and literal special characters', () => {
@@ -15,14 +15,14 @@ test('forwards all incoming parameters, repeated values and literal special char
   ]);
   const url = buildTrackedUrl(destination, { search: params.toString() });
   for (const key of params.keys()) assert.deepEqual(url.searchParams.getAll(key), params.getAll(key));
-  assert.equal(url.searchParams.get('r'), '8yzbyk');
+  assert.equal(url.searchParams.get('r'), '54jwjv');
 });
 
 test('preserves the fixed destination and affiliate code against incoming collisions', () => {
   const url = buildTrackedUrl(destination, { search: '?r=other&r=third&redirect=https://other.example&next=//other.example' });
-  assert.equal(url.origin, 'https://7s3venbet.io');
+  assert.equal(url.origin, 'https://recebaplx.bet');
   assert.equal(url.pathname, '/');
-  assert.deepEqual(url.searchParams.getAll('r'), ['8yzbyk']);
+  assert.deepEqual(url.searchParams.getAll('r'), ['54jwjv']);
 });
 
 test('generates fbc from the current fbclid, preserving its case', () => {
